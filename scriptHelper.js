@@ -3,17 +3,17 @@
 require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    let missionTarget = documentgetElementById("missionTarget");
+    let missionTarget = document.getElementById("missionTarget");
     missionTarget.innerHTML = `
                  <h2>Mission Destination</h2>
                  <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
+                     <li>Name: ${name}</li>
+                     <li>Diameter: ${diameter}</li>
                      <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
+                     <li>Distance from Earth: ${distance}</li>
+                     <li>Number of Moons: ${moons}</li>
                  </ol>
-                 <img src="">
+                 <img src="${imageUrl}">
                  `
  }
  
@@ -38,19 +38,19 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
         // validate that all fields are filled and pushing an alert if not.
         if (validateInput(pilot) === 'Empty' || validateInput(copilot) === 'Empty' || validateInput(fuelLevel) === 'Empty' || validateInput(cargoLevel) === 'Empty' ) {
-            alert ('All fields required. Please enter all required information.')
+            alert('All fields required. Please enter all required information.');
         }
         // checks to make sure pilot and copilot are strings and fuel and cargo are numbers
         else if (validateInput(pilot) === 'Is a Number' || validateInput(copilot) === 'Is a Number') {
-            alert ('Number entered in Pilot and Co-pilot fields. Please enter a name.')
+            alert('Number entered in Pilot and Co-pilot fields. Please enter a name.');
         }  
         else if (validateInput(fuelLevel) === 'Not a Number' || validateInput(cargoLevel) === 'Not a Number') {
-            alert ('Invalid entry. Please enter a numeric value for Fuel and Cargo.')
+            alert('Invalid entry. Please enter a numeric value for Fuel and Cargo.');
         } 
         // Add Pilot and Copilot names if all fields are correctly filled
         else {
-            pilotStatus.innerHTML = `Pilot: ${pilot.value}`;
-            copilotStatus.innerHTML = `Co-pilot: ${copilot.value}`;
+            pilotStatus.innerHTML = `Pilot: ${pilot}`;
+            copilotStatus.innerHTML = `Co-pilot: ${copilot}`;
         }
 
         // Change faultyItems to visible, launch Status to red text, and to display "Shuttle not ready for launch" if fuel levels is too low (< 10000)
@@ -69,7 +69,6 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         }
         // if shuttle is ready to launch then change launch Status to green and display "Shuttle is ready for launch"
         else if (Number(fuelLevel) > 10000 || Number(cargoLevel) < 10000) {
-            list.style.visibility = 'visible';
             launchStatus.innerHTML = 'Shuttle is ready for launch';
             launchStatus.style.color = 'green';
         }   
