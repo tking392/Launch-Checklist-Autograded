@@ -28,12 +28,12 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-        let pilotStatus = document.getElementId("pilotStatus");
-        let copilotStatus = document.getElementId("copilotStatus");
-        let faultyItems = document.getElementId("faultyItems");
-        let fuelStatus = document.getElementId("fuelStatus");
-        let launchStatus = document.getElementId("launchStatus");
-        let cargoStatus = document.getElementId("cargoStatus");
+        let pilotStatus = document.getElementById("pilotStatus");
+        let copilotStatus = document.getElementById("copilotStatus");
+        let faultyItems = document.getElementById("faultyItems");
+        let fuelStatus = document.getElementById("fuelStatus");
+        let launchStatus = document.getElementById("launchStatus");
+        let cargoStatus = document.getElementById("cargoStatus");
 
 
         // validate that all fields are filled and pushing an alert if not.
