@@ -3,8 +3,8 @@
 require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    // Here is the HTML formatting for our mission target div.
-    /*
+    let missionTarget = documentgetElementById("missionTarget");
+    missionTarget.innerHTML = `
                  <h2>Mission Destination</h2>
                  <ol>
                      <li>Name: </li>
@@ -14,7 +14,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                      <li>Number of Moons: </li>
                  </ol>
                  <img src="">
-    */
+                 `
  }
  
  function validateInput(testInput) {
@@ -62,13 +62,14 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         } 
         // if cargo mass > 10000 change list to visible with an updated cargo status that states there is too much mass for shuttle to launch and change launch Status to red
         else if (Number(cargoLevel) > 10000) {
-            list.visibility = 'visible';
+            list.style.visibility = 'visible';
             cargoStatus.innerHTML = 'Too Much Mass in Cargo Area';
             launchStatus.innerHTML = "Shuttle not ready for launch";
             launchStatus.style.color = 'red';
         }
         // if shuttle is ready to launch then change launch Status to green and display "Shuttle is ready for launch"
         else if (Number(fuelLevel) > 10000 || Number(cargoLevel) < 10000) {
+            list.style.visibility = 'visible';
             launchStatus.innerHTML = 'Shuttle is ready for launch';
             launchStatus.style.color = 'green';
         }   
@@ -77,13 +78,16 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  async function myFetch() {
      let planetsReturned;
  
-     planetsReturned = await fetch().then( function(response) {
-         });
+     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        return response.json()
+        });
  
      return planetsReturned;
  }
  
  function pickPlanet(planets) {
+    let randPlanet = Math.floor(Math.random() * planets.length);
+    return planets[randPlanet];
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
